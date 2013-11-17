@@ -18,5 +18,7 @@ window.Grid.game.Collisions = function (game) {
 
     this.onCollide = function () {
         dot.die();
+        Grid.game.gameOver();
+
     };
 };

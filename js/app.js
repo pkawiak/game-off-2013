@@ -46,4 +46,11 @@
         collisions.update();
     }
 
+    Grid.game.gameOver = function () {
+        gameOver = true;
+        allGameObjects.alpha=0;
+        score.finalScore();
+
+    }
+
 })();

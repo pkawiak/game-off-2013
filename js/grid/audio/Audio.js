@@ -45,6 +45,10 @@ window.Grid.audio.Audio = function (game) {
     };
 
     this.update = function () {
+        if (gameOver) {
+            this.mute.kill();
+            this.theme.pause();
+        }
         if (this.keyboard.isDown(Phaser.Keyboard.A)) {
             this.playCrash();
         }
