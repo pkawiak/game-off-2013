@@ -17,13 +17,30 @@ window.Grid.score.Score = function (game) {
     };
 
     this.update = function () {
-        this.scoreText.setText('Score: ' + Math.round(this.addScore(10)));
+        if (!gameOver) {
+            this.scoreText.setText('Score: ' + Math.round(this.addScore(10)));
+        }
 
     };
 
-    this.addScore = function(howMuch) {
-        this.score+=howMuch;
-        return this.score;
+    this.addScore = function (howMuch) {
+        if (!gameOver) {
+            this.score += howMuch;
+            return this.score;
+        }
+    };
+
+
+    this.finalScore = function () {
+        this.game.add.bitmapText(120, 200, 'Game Over', { font: '50px Arial', align: 'center' });
+        this.scoreText.setText("");
+        this.game.add.bitmapText(50, 270, 'Total score: ' + this.score, { font: '50px Arial', align: 'center' });
+        this.game.add.button(135, 350, 'start', this.restartGame, this, 0, 0, 0);
+
+    };
+
+    this.restartGame = function (){
+        window.location.reload();
     }
 
 };
