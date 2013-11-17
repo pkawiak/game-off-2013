@@ -13,14 +13,19 @@ window.Grid.score.Score = function (game) {
     };
 
     this.create = function () {
-        this.scoreText = this.game.add.bitmapText(150, 0, 'Score', { font: '50px Arial', align: 'center' });
+        this.scoreText = this.game.add.bitmapText(145, 0, 'Score', { font: '50px Arial', align: 'center' });
         console.log(this.scoreText);
     };
 
     this.update = function () {
-        this.scoreText.setText('Score: ' + Math.round(this.score++));
+        this.scoreText.setText('Score: ' + Math.round(this.addScore(10)));
 
     };
+
+    this.addScore = function(howMuch) {
+        this.score+=howMuch;
+        return this.score;
+    }
 
 };
 
