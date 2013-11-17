@@ -8,6 +8,7 @@
         }),
         dot = new Grid.game.Dot(game),
         background = new Grid.game.Background(game),
+        lines = new Grid.game.Lines(game),
         audio = new Grid.audio.Audio(game),
         allGameObjects,
         score = new Grid.score.Score(game);
@@ -17,6 +18,7 @@
         audio.preload();
         score.preload();
         dot.preload();
+        lines.preload();
     }
 
     function init() {
@@ -32,14 +34,14 @@
         allGameObjects.y = Grid.SCORE_HEIGHT;
         background.create(allGameObjects);
         dot.create(allGameObjects);
+        lines.create(allGameObjects);
     }
 
     function update() {
         dot.update();
         score.update();
         audio.update();
-
-
+        lines.update();
     }
 
 })();
