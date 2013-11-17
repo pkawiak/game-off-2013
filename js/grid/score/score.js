@@ -5,7 +5,7 @@ window.Grid.score.Score = function (game) {
     this.scoreText = undefined;
 
     this.preload = function () {
-        this.game.load.bitmapFont('Bauhaus', 'assets/fonts/font.png', 'assets/fonts/font.xml');
+        this.game.load.bitmapFont('Arial', 'assets/fonts/font.png', 'assets/fonts/font.xml');
     };
 
     this.init = function () {
@@ -13,7 +13,7 @@ window.Grid.score.Score = function (game) {
     };
 
     this.create = function () {
-        this.scoreText = this.game.add.bitmapText(200, 0, 'Score', { font: 'Bauhaus', align: 'center' });
+        this.scoreText = this.game.add.bitmapText(150, 0, 'Score', { font: '50px Arial', align: 'center' });
         console.log(this.scoreText);
     };
 
