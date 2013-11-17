@@ -3,6 +3,8 @@ window.Grid.audio.Audio = function (game) {
     this.theme = this.crash = this.score = undefined;
     this.game = game;
 
+    this.musicOff = false;
+
     this.preload = function () {
         this.game.load.audio('theme', ['assets/audio/theme.mp3']);
         this.game.load.audio('score', ['assets/audio/score.mp3']);
@@ -23,16 +25,13 @@ window.Grid.audio.Audio = function (game) {
     };
 
     this.update = function () {
+        var theme = this.theme;
         if (this.keyboard.isDown(Phaser.Keyboard.A)) {
-            var theme = this.theme;
             theme.pause();
             this.playCrash();
             setTimeout(function(){theme.resume();},1000);
-
-
         }
         else if (this.keyboard.isDown(Phaser.Keyboard.S)) {
-            var theme = this.theme;
             theme.pause();
             this.playScore();
             setTimeout(function(){theme.resume();},1000);
