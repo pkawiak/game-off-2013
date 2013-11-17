@@ -9,7 +9,9 @@ window.Grid.game.Lines = function (game) {
 
     this.preload = function () {
         game.load.image('horizontal_line', 'assets/images/horizontal_line.png');
+        game.load.image('horizontal_line_down', 'assets/images/horizontal_line_down.png');
         game.load.image('vertical_line', 'assets/images/vertical_line.png');
+        game.load.image('vertical_line_right', 'assets/images/vertical_line_right.png');
         game.load.image('breach', 'assets/images/breach.png');
     };
 
@@ -31,14 +33,15 @@ window.Grid.game.Lines = function (game) {
             x, y, imageName, linePart1, linePart2, velocity, breach, breachPoint, breachPointA, breachPointB;
 
         velocity = {x: 0, y: 0};
-        imageName = vertical ? 'vertical_line' : 'horizontal_line';
 
         if (vertical) {
 
             if (velocityGreaterThanZero) {
+                imageName = "vertical_line_right";
                 x = 0;
                 velocity.x = LINE_VELOCITY;
             } else {
+                imageName = "vertical_line";
                 x = Grid.WIDTH;
                 velocity.x = -LINE_VELOCITY;
             }
@@ -52,9 +55,11 @@ window.Grid.game.Lines = function (game) {
             breach.body.width = 2;
         } else { //horizontal
             if (velocityGreaterThanZero) {
+                imageName = "horizontal_line_down";
                 y = 0;
                 velocity.y = LINE_VELOCITY;
             } else {
+                imageName = "horizontal_line";
                 y = Grid.HEIGHT;
                 velocity.y = -LINE_VELOCITY;
             }

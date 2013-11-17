@@ -35,7 +35,6 @@ window.Grid.game.Dot = function (game) {
     this.requestMove = function (x, y) {
         if (this.canMove(x, y)) {
             moving = true;
-            console.log({x: dot.x, y: dot.y});
             game.add.tween(dot).to(
                 {x: dot.x + x, y: dot.y + y},
                 MOVE_DURATION,
