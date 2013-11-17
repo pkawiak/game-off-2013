@@ -29,7 +29,7 @@ window.Grid.game.Bonus = function (game) {
     this.removeBonus = function () {
         this.bonus.kill();
         this.bonus = undefined;
-        this.newBonus = Math.floor(Math.random() * 3000);
+        this.newBonus = Math.floor(Math.random() * 1000);
     };
 
     this.update = function () {
