@@ -1,4 +1,4 @@
-window.Grid.background.Background = function (game) {
+window.Grid.game.Background = function (game) {
 
     var background, group;
 

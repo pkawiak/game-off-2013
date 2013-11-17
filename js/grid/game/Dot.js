@@ -1,4 +1,4 @@
-window.Grid.dot.Dot = function (game) {
+window.Grid.game.Dot = function (game) {
 
     var dot, group;
 

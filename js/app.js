@@ -8,8 +8,8 @@
             update: update,
             init: init
         }),
-        dot = new Grid.dot.Dot(game),
-        background = new Grid.background.Background(game),
+        dot = new Grid.game.Dot(game),
+        background = new Grid.game.Background(game),
         allGameObjects,
         score = new Grid.score.Score(game);
 
