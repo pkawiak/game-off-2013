@@ -5,7 +5,8 @@ window.Grid.game.Dot = function (game) {
         DOT_SPEED = 100,
         DOT_STEP = 64,
         MOVE_DURATION = 500,
-        moving = false;
+        moving = false,
+        dx = 3, dy = 3;
 
     this.preload = function () {
         game.load.image('dot', 'assets/images/dot.png');
@@ -19,7 +20,7 @@ window.Grid.game.Dot = function (game) {
     };
 
     this.requestMove = function (x, y) {
-        if (!moving) {
+        if (this.canMove(x, y)) {
             moving = true;
             console.log({x: dot.x, y: dot.y});
             game.add.tween(dot).to(
@@ -27,9 +28,32 @@ window.Grid.game.Dot = function (game) {
                 MOVE_DURATION,
                 Phaser.Easing.Sinusoidal.None, true
             ).onCompleteCallback(function () {
-                    moving = false;
-                });
+                                     moving = false;
+                                 });
         }
+    };
+
+    this.canMove = function (x, y) {
+        if (!moving) {
+            if (x < 0 && dx > 0) {
+                dx--;
+                return true;
+            }
+            if (x > 0 && dx < 6) {
+                dx++;
+                return true;
+            }
+            if (y < 0 && dy > 0) {
+                dy--;
+                return true;
+            }
+            if (y > 0 && dy < 6) {
+                dy++;
+                return true;
+            }
+            return false;
+        }
+        return false;
     };
 
     this.update = function () {
