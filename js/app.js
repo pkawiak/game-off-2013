@@ -15,9 +15,10 @@
         audio = new Grid.audio.Audio(game),
         allGameObjects,
         score = new Grid.score.Score(game),
-        dot = new Grid.game.Dot(game,audio),
         collisions = new Grid.game.Collisions(game, score,audio),
-        bombs = new Grid.game.Bombs(game);
+        bombs = new Grid.game.Bombs(game),
+        bonuses = new Grid.game.Bonus(game),
+        dot = new Grid.game.Dot(game,audio,score,bonuses);
 
     function preload() {
         this.game.load.spritesheet('start', 'assets/images/start.png', 229, 45);
@@ -27,6 +28,7 @@
         score.preload();
         dot.preload();
         bombs.preload();
+        bonuses.preload();
         lines.preload();
     }
 
@@ -50,6 +52,7 @@
         background.create(allGameObjects);
         dot.create(allGameObjects);
         bombs.create(allGameObjects);
+        bonuses.create(allGameObjects);
         lines.create(allGameObjects);
         collisions.create(dot, lines);
     }
@@ -67,6 +70,7 @@
         if (gameStarted && !gameOver) {
             dot.update();
             bombs.update();
+            bonuses.update();
             score.update();
             audio.update();
             lines.update();
