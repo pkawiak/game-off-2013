@@ -24,21 +24,21 @@ window.Grid.audio.Audio = function (game) {
         //  setting the anchor to the center
         this.mute.anchor.setTo(0.5, 0.5);
 
-        this.theme = game.add.audio('theme',1,true);
-        this.score = game.add.audio('score',1,true);
-        this.crash = game.add.audio('crash',1,true);
+        this.theme = game.add.audio('theme', 1, true);
+        this.score = game.add.audio('score', 1, true);
+        this.crash = game.add.audio('crash', 1, true);
 
-        this.theme.play('',0,1,true);
+        this.theme.play('', 0, 1, true);
     };
 
-    this.muteClick = function() {
+    this.muteClick = function () {
         var theme = this.theme, mute = this.mute;
         if (theme.isPlaying) {
             theme.pause();
-            mute.setFrames(0,0,0);
+            mute.setFrames(0, 0, 0);
         } else {
             theme.resume();
-           mute.setFrames(1,1,1);
+            mute.setFrames(1, 1, 1);
 
         }
 
@@ -57,22 +57,19 @@ window.Grid.audio.Audio = function (game) {
         }
     };
 
-    this.playCrash = function() {
+    this.playCrash = function () {
         var theme = this.theme;
-        if (theme.isPlaying) {
-            theme.pause();
-            setTimeout(function(){theme.resume();},1000);
-        }
-        this.crash.play('',0,1,false);
+        theme.pause();
+        this.crash.play('', 0, 1, false);
     };
 
-    this.playScore = function() {
+    this.playScore = function () {
         var theme = this.theme;
-        if (theme.isPlaying) {
-            theme.pause();
-            setTimeout(function(){theme.resume();},1000);
-        }
-        this.score.play('',0,1,false);
+//        if (theme.isPlaying) {
+//            theme.pause();
+//            setTimeout(function(){theme.resume();},1000);
+//        }
+        this.score.play('', 0, 1, false);
 
     }
 
