@@ -3,11 +3,13 @@ window.Grid.game.Lines = function (game) {
     var lines = [],
         group,
         MAX_LINES = 3,
-        LINE_VELOCITY = 100;
+        LINE_VELOCITY = 100,
+        BREACH_RADIUS = 50;
 
     this.preload = function () {
         game.load.image('horizontal_line', 'assets/images/horizontal_line.png');
         game.load.image('vertical_line', 'assets/images/vertical_line.png');
+        game.load.image('breach', 'assets/images/breach.png');
     };
 
     this.create = function (gr) {
@@ -21,13 +23,13 @@ window.Grid.game.Lines = function (game) {
     this.addLine = function () {
         var vertical = Math.random() * 100 > 50,
             velocityGreaterThanZero = Math.random() * 100 > 50,
-            x, y, imageName, line, velocity;
+            x, y, imageName, linePart1, linePart2, velocity, breach, breachPoint, breachPointA, breachPointB;
 
         velocity = {x: 0, y: 0};
         imageName = vertical ? 'vertical_line' : 'horizontal_line';
 
         if (vertical) {
-            y = 0;
+
             if (velocityGreaterThanZero) {
                 x = 0;
                 velocity.x = LINE_VELOCITY;
@@ -35,8 +37,15 @@ window.Grid.game.Lines = function (game) {
                 x = Grid.WIDTH;
                 velocity.x = -LINE_VELOCITY;
             }
+            breachPoint = Grid.WIDTH * 0.5;
+            breachPointA = breachPoint - BREACH_RADIUS;
+            breachPointB = breachPoint + BREACH_RADIUS;
+            linePart1 = new Phaser.Sprite(game, x, -Grid.HEIGHT + breachPointA, imageName);
+            linePart2 = new Phaser.Sprite(game, x, breachPointB, imageName);
+            breach = new Phaser.Sprite(game, x, breachPointA, "breach");
+            breach.body.height = BREACH_RADIUS * 2;
+            breach.body.width = 2;
         } else { //horizontal
-            x = 0;
             if (velocityGreaterThanZero) {
                 y = 0;
                 velocity.y = LINE_VELOCITY;
@@ -44,13 +53,35 @@ window.Grid.game.Lines = function (game) {
                 y = Grid.HEIGHT;
                 velocity.y = -LINE_VELOCITY;
             }
+            breachPoint = Grid.HEIGHT * 0.5;
+            breachPointA = breachPoint - BREACH_RADIUS;
+            breachPointB = breachPoint + BREACH_RADIUS;
+            linePart1 = new Phaser.Sprite(game, -Grid.HEIGHT + breachPointA, y, imageName);
+            linePart2 = new Phaser.Sprite(game, breachPointB, y, imageName);
+            breach = new Phaser.Sprite(game, breachPointA, y, "breach");
+            breach.body.width = BREACH_RADIUS * 2;
+            breach.body.height = 2;
         }
 
-        line = new Phaser.Sprite(game, x, y, imageName);
-        line.body.velocity.x = velocity.x;
-        line.body.velocity.y = velocity.y;
-        lines.push(line);
-        group.add(line);
+
+        linePart1.body.velocity.x = velocity.x;
+        linePart1.body.velocity.y = velocity.y;
+        linePart2.body.velocity.x = velocity.x;
+        linePart2.body.velocity.y = velocity.y;
+        breach.body.velocity.x = velocity.x;
+        breach.body.velocity.y = velocity.y;
+
+        linePart1.__isVertical = vertical;
+        linePart2.__isVertical = vertical;
+        breach.__isVertical = vertical;
+
+        lines.push(linePart1);
+        lines.push(linePart2);
+        lines.push(breach);
+
+        group.add(linePart1);
+        group.add(linePart2);
+        group.add(breach);
     };
 
 
@@ -62,10 +93,18 @@ window.Grid.game.Lines = function (game) {
         var i , line, newLines = [];
         for (i = 0; i < lines.length; i++) {
             line = lines[i];
-            if (line.x >= 0 && line.x <= Grid.WIDTH && line.y >= 0 && line.y <= Grid.HEIGHT) {
-                newLines.push(line);
+            if (line.__isVertical) {
+                if (line.x >= 0 && line.x <= Grid.HEIGHT) {
+                    newLines.push(line);
+                } else {
+                    group.remove(line);
+                }
             } else {
-                group.remove(line);
+                if (line.y >= 0 && line.y <= Grid.WIDTH) {
+                    newLines.push(line);
+                } else {
+                    group.remove(line);
+                }
             }
         }
         lines = newLines;
