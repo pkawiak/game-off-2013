@@ -1,4 +1,4 @@
-window.Grid.game.Collisions = function (game, score) {
+window.Grid.game.Collisions = function (game, score, audio) {
 
     var dot, lines;
 
@@ -21,6 +21,8 @@ window.Grid.game.Collisions = function (game, score) {
 
     this.onCollide = function () {
         dot.die();
+        audio.playCrash();
+
         Grid.game.gameOver();
 
     };
@@ -28,5 +30,6 @@ window.Grid.game.Collisions = function (game, score) {
     this.onPass = function (dot, breach) {
         score.addScore(100);
         lines.breachPassed(breach);
+        audio.playScore();
     };
 };

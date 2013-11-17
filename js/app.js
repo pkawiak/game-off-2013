@@ -16,7 +16,7 @@
         audio = new Grid.audio.Audio(game),
         allGameObjects,
         score = new Grid.score.Score(game),
-        collisions = new Grid.game.Collisions(game, score);
+        collisions = new Grid.game.Collisions(game, score,audio);
 
     function preload() {
         this.game.load.spritesheet('start', 'assets/images/start.png', 229, 45);

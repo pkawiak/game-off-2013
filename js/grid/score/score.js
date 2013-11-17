@@ -42,7 +42,6 @@ window.Grid.score.Score = function (game) {
     this.restartGame = function () {
         window.location.reload();
     }
-
 };
 
 
