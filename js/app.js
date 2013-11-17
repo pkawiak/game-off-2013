@@ -1,4 +1,8 @@
 (function () {
+//    if (String(window.location.href).search('restart')!=-1) {
+//        setInterval(function(){createGame();},1);
+//
+//    }
     // Create game instance and connect init, create and update methods
     var game = new Phaser.Game(Grid.WIDTH, Grid.HEIGHT + Grid.SCORE_HEIGHT, Phaser.AUTO, "Teh Grid", {
             preload: preload,
