@@ -11,6 +11,7 @@
         lines = new Grid.game.Lines(game),
         audio = new Grid.audio.Audio(game),
         allGameObjects,
+        collisions = new Grid.game.Collisions(game),
         score = new Grid.score.Score(game);
 
     function preload() {
@@ -24,7 +25,6 @@
     function init() {
         score.init();
         audio.init();
-
     }
 
     function create() {
@@ -35,6 +35,7 @@
         background.create(allGameObjects);
         dot.create(allGameObjects);
         lines.create(allGameObjects);
+        collisions.create(dot, lines);
     }
 
     function update() {
@@ -42,6 +43,7 @@
         score.update();
         audio.update();
         lines.update();
+        collisions.update();
     }
 
 })();

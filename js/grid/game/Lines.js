@@ -14,6 +14,10 @@ window.Grid.game.Lines = function (game) {
         group = gr;
     };
 
+    this.getLines = function () {
+        return lines;
+    };
+
     this.addLine = function () {
         var vertical = Math.random() * 100 > 50,
             velocityGreaterThanZero = Math.random() * 100 > 50,

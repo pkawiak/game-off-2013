@@ -2,7 +2,6 @@ window.Grid.game.Dot = function (game) {
 
     var dot, group, keyboard,
         DOT_SIZE = 32,
-        DOT_SPEED = 100,
         DOT_STEP = 64,
         MOVE_DURATION = 500,
         moving = false,
@@ -10,6 +9,10 @@ window.Grid.game.Dot = function (game) {
 
     this.preload = function () {
         game.load.image('dot', 'assets/images/dot.png');
+    };
+
+    this.getDot = function () {
+        return dot;
     };
 
     this.create = function (gr) {
@@ -73,6 +76,10 @@ window.Grid.game.Dot = function (game) {
         } else if (keyboard.justReleased(Phaser.Keyboard.DOWN)) {
             this.requestMove(0, DOT_STEP);
         }
-    }
+    };
+
+    this.die = function () {
+        dot.alpha = 0;
+    };
 
 };
