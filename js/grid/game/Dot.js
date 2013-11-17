@@ -34,7 +34,7 @@ window.Grid.game.Dot = function (game,audio,score,bonuses) {
     };
 
     this.requestMove = function (x, y) {
-        var me = this, a = audio;
+        var me = this;
         if (this.canMove(x, y)) {
 
             if (Grid.DX == Grid.BX && Grid.DY == Grid.BY) {
@@ -43,11 +43,11 @@ window.Grid.game.Dot = function (game,audio,score,bonuses) {
                 Grid.game.gameOver();
             }
 
+        //    console.log(Grid.SX,Grid.DX,Grid.SY,Grid.DY);
             if (Grid.DX == Grid.SX && Grid.DY == Grid.SY) {
                 audio.playScore();
                 score.addScore(1000);
                 bonuses.removeBonus();
-
             }
 
             moving = true;

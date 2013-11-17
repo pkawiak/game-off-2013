@@ -4,6 +4,7 @@ window.Grid = {
     SCORE_HEIGHT: 70,
     CELL_SIZE: 64,
     BOMB_TIME: 5000,
+    BONUS_TIME: 8000,
     CELLS_COUNT : 7,
     DX: 3,
     DY: 3
