@@ -58,9 +58,11 @@ window.Grid.audio.Audio = function (game) {
     };
 
     this.playCrash = function () {
-        var theme = this.theme;
-        theme.pause();
-        this.crash.play('', 0, 1, false);
+        if (!gameOver) {
+            var theme = this.theme;
+            theme.pause();
+            this.crash.play('', 0, 1, false);
+        }
     };
 
     this.playScore = function () {

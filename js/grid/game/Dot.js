@@ -1,10 +1,11 @@
-window.Grid.game.Dot = function (game) {
+window.Grid.game.Dot = function (game,audio) {
 
     var dot, group, keyboard,
         DOT_STEP = 64,
         MOVE_DURATION = 300,
         moving = false,
         dx = 3, dy = 3;
+
 
     this.preload = function () {
         game.load.image('dot', 'assets/images/dot.png');
@@ -33,7 +34,14 @@ window.Grid.game.Dot = function (game) {
     };
 
     this.requestMove = function (x, y) {
+        var me = this, a = audio;
         if (this.canMove(x, y)) {
+
+            if (Grid.DX == Grid.BX && Grid.DY == Grid.BY) {
+                this.die();
+                audio.playCrash();
+                Grid.game.gameOver();
+            }
             moving = true;
             game.add.tween(dot).to(
                 {x: dot.x + x, y: dot.y + y},
@@ -41,6 +49,7 @@ window.Grid.game.Dot = function (game) {
                 Phaser.Easing.Linear.None, true
             ).onCompleteCallback(function () {
                     moving = false;
+
                 });
         }
     };
@@ -48,19 +57,19 @@ window.Grid.game.Dot = function (game) {
     this.canMove = function (x, y) {
         if (!moving) {
             if (x < 0 && dx > 0) {
-                dx--;
+                Grid.DX--;
                 return true;
             }
             if (x > 0 && dx < 6) {
-                dx++;
+                Grid.DX++;
                 return true;
             }
             if (y < 0 && dy > 0) {
-                dy--;
+                Grid.DY--;
                 return true;
             }
             if (y > 0 && dy < 6) {
-                dy++;
+                Grid.DY++;
                 return true;
             }
             return false;

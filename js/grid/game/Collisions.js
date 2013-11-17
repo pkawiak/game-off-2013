@@ -20,6 +20,7 @@ window.Grid.game.Collisions = function (game, score, audio) {
     };
 
     this.onCollide = function () {
+        console.log('test');
         dot.die();
         audio.playCrash();
 

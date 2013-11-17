@@ -10,13 +10,14 @@
             update: update,
             init: init
         }),
-        dot = new Grid.game.Dot(game),
         background = new Grid.game.Background(game),
         lines = new Grid.game.Lines(game),
         audio = new Grid.audio.Audio(game),
         allGameObjects,
         score = new Grid.score.Score(game),
-        collisions = new Grid.game.Collisions(game, score,audio);
+        dot = new Grid.game.Dot(game,audio),
+        collisions = new Grid.game.Collisions(game, score,audio),
+        bombs = new Grid.game.Bombs(game);
 
     function preload() {
         this.game.load.spritesheet('start', 'assets/images/start.png', 229, 45);
@@ -25,6 +26,7 @@
         audio.preload();
         score.preload();
         dot.preload();
+        bombs.preload();
         lines.preload();
     }
 
@@ -47,6 +49,7 @@
         allGameObjects.y = Grid.SCORE_HEIGHT;
         background.create(allGameObjects);
         dot.create(allGameObjects);
+        bombs.create(allGameObjects);
         lines.create(allGameObjects);
         collisions.create(dot, lines);
     }
@@ -61,8 +64,9 @@
 
 
     function update() {
-        if (gameStarted) {
+        if (gameStarted && !gameOver) {
             dot.update();
+            bombs.update();
             score.update();
             audio.update();
             lines.update();
