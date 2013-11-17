@@ -3,7 +3,7 @@ window.Grid.background.Background = function (game) {
     var background;
 
     this.preload = function () {
-        game.load.image('grid_tile', 'assets/grid.png');
+        game.load.image('grid_tile', 'assets/images/grid_tile.png');
     }
 
     this.create = function () {
