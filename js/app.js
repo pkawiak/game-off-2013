@@ -15,10 +15,10 @@
         audio = new Grid.audio.Audio(game),
         allGameObjects,
         score = new Grid.score.Score(game),
-        collisions = new Grid.game.Collisions(game, score,audio),
+        collisions = new Grid.game.Collisions(game, score, audio),
         bombs = new Grid.game.Bombs(game),
         bonuses = new Grid.game.Bonus(game),
-        dot = new Grid.game.Dot(game,audio,score,bonuses);
+        dot = new Grid.game.Dot(game, audio, score, bonuses);
 
     function preload() {
         this.game.load.spritesheet('start', 'assets/images/start.png', 229, 45);
@@ -38,9 +38,11 @@
     }
 
     function create() {
-        this.welcomeText = this.game.add.bitmapText(200, 150, 'GRID', { font: '50px Arial', align: 'center' });
-        this.start = this.game.add.button(150, 250, 'start', startGame, this, 0, 0, 0);
+        this.welcomeText = this.game.add.bitmapText(200, 250, 'TEH GRID', { font: '50px Arial', align: 'center' });
+        this.enterTehGrid = this.game.add.bitmapText(170, 150, 'press SPACE to enter', { font: '30px Arial', align: 'center' });
 
+        this.startKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+        this.startKey.onDown.add(startGame, this);
 
     }
 
@@ -58,11 +60,14 @@
     }
 
     function startGame() {
-        this.start.setFrames(1, 1, 1);
-        this.welcomeText.setText("");
-        this.start.kill();
-        createGame();
-        gameStarted = true;
+        if (!gameStarted) {
+            this.welcomeText.setText("");
+            this.enterTehGrid.setText("");
+            createGame();
+            gameStarted = true;
+        } else if (UGLY_GLOBAL_LOL) {
+            window.location.reload();
+        }
     }
 
 
@@ -82,6 +87,7 @@
         gameOver = true;
         allGameObjects.alpha = 0;
         score.finalScore();
+        UGLY_GLOBAL_LOL = true;
 
     }
 

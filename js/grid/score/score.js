@@ -32,16 +32,12 @@ window.Grid.score.Score = function (game) {
 
 
     this.finalScore = function () {
-        this.game.add.bitmapText(120, 200, 'Game Over', { font: '50px Arial', align: 'center' });
+        this.game.add.bitmapText(150, 150, 'Game Over', { font: '50px Arial', align: 'center' });
         this.scoreText.setText("");
-        this.game.add.bitmapText(50, 270, 'Total score: ' + this.score, { font: '50px Arial', align: 'center' });
-        this.game.add.button(135, 350, 'start', this.restartGame, this, 0, 0, 0);
-
+        this.game.add.bitmapText(145, 220, 'Total score ', { font: '50px Arial', align: 'center' });
+        this.game.add.bitmapText(230, 290, "" + this.score, { font: '50px Arial', align: 'center' });
+        this.game.add.bitmapText(130, 370, 'Press SPACE to restart', { font: '30px Arial', align: 'center' });
     };
-
-    this.restartGame = function () {
-        window.location.reload();
-    }
 };
 
 
