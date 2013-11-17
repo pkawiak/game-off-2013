@@ -1,8 +1,6 @@
 (function () {
     // Create game instance and connect init, create and update methods
-    var WIDTH = 512,
-        HEIGHT = 582,
-        game = new Phaser.Game(WIDTH, HEIGHT, Phaser.AUTO, "Teh Grid", {
+    var game = new Phaser.Game(Grid.WIDTH, Grid.HEIGHT + Grid.SCORE_HEIGHT, Phaser.AUTO, "Teh Grid", {
             preload: preload,
             create: create,
             update: update,
@@ -26,12 +24,13 @@
     function create() {
         score.create();
         allGameObjects = game.add.group();
-        allGameObjects.y = 70;
+        allGameObjects.y = Grid.SCORE_HEIGHT;
         background.create(allGameObjects);
         dot.create(allGameObjects);
     }
 
     function update() {
+        dot.update();
         score.update();
     }
 
