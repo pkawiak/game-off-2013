@@ -1,13 +1,15 @@
 window.Grid.dot.Dot = function (game) {
 
-    var dot;
+    var dot, group;
 
     this.preload = function () {
         game.load.image('dot', 'assets/images/dot.png');
     };
 
-    this.create = function () {
-        dot = game.add.sprite(0, 0, 'dot');
+    this.create = function (gr) {
+        group = gr;
+        dot = new Phaser.Sprite(game, 0, 0, 'dot');
+        group.add(dot);
     };
 
 };

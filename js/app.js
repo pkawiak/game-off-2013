@@ -9,7 +9,8 @@
             init: init
         }),
         dot = new Grid.dot.Dot(game),
-        background = new Grid.background.Background(game);
+        background = new Grid.background.Background(game),
+        allGameObjects,
         score = new Grid.score.Score(game);
 
     function preload() {
@@ -23,9 +24,11 @@
     }
 
     function create() {
-        background.create();
         score.create();
-        dot.create();
+        allGameObjects = game.add.group();
+        allGameObjects.y = 70;
+        background.create(allGameObjects);
+        dot.create(allGameObjects);
     }
 
     function update() {
