@@ -11,7 +11,7 @@ window.Grid.game.Background = function (game) {
         background = new Phaser.TileSprite(game, 0, 0, game.width, game.height - 70, "grid_tile");
         background.alpha = 0.5;
         group.add(background);
-        //background.tileScale = new Phaser.Point(0.5, 0.5);
+        //background.tileScale = new Phaser.Point(2, 2);
         //background.tilePosition = new Phaser.Point(-64, -64);
     };
 
