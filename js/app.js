@@ -13,21 +13,20 @@
 
     function preload() {
         background.preload();
-//        score.preload();
+        score.preload();
     }
 
     function init() {
-//        score.init();
+        score.init();
     }
 
     function create() {
         background.create();
-//        score.create();
+        score.create();
     }
 
     function update() {
-//        score.update();
-
+        score.update();
     }
 
 })();
