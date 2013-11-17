@@ -14,7 +14,6 @@ window.Grid.score.Score = function (game) {
 
     this.create = function () {
         this.scoreText = this.game.add.bitmapText(145, 0, 'Score', { font: '50px Arial', align: 'center' });
-        console.log(this.scoreText);
     };
 
     this.update = function () {
