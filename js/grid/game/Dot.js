@@ -1,7 +1,6 @@
 window.Grid.game.Dot = function (game) {
 
     var dot, group, keyboard,
-        DOT_SIZE = 32,
         DOT_STEP = 64,
         MOVE_DURATION = 300,
         moving = false,
