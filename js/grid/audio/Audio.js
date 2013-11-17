@@ -45,25 +45,29 @@ window.Grid.audio.Audio = function (game) {
     };
 
     this.update = function () {
-        var theme = this.theme;
         if (this.keyboard.isDown(Phaser.Keyboard.A)) {
-            theme.pause();
             this.playCrash();
-            setTimeout(function(){theme.resume();},1000);
         }
         else if (this.keyboard.isDown(Phaser.Keyboard.S)) {
-            theme.pause();
             this.playScore();
-            setTimeout(function(){theme.resume();},1000);
         }
     };
 
     this.playCrash = function() {
-
+        var theme = this.theme;
+        if (theme.isPlaying) {
+            theme.pause();
+            setTimeout(function(){theme.resume();},1000);
+        }
         this.crash.play('',0,1,false);
     };
 
     this.playScore = function() {
+        var theme = this.theme;
+        if (theme.isPlaying) {
+            theme.pause();
+            setTimeout(function(){theme.resume();},1000);
+        }
         this.score.play('',0,1,false);
 
     }
