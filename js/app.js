@@ -8,11 +8,13 @@
             update: update,
             init: init
         }),
+        dot = new Grid.dot.Dot(game),
         background = new Grid.background.Background(game);
         score = new Grid.score.Score(game);
 
     function preload() {
         background.preload();
+        dot.preload();
 //        score.preload();
     }
 
@@ -23,6 +25,7 @@
     function create() {
         background.create();
 //        score.create();
+        dot.create();
     }
 
     function update() {
