@@ -18,7 +18,17 @@ window.Grid.game.Dot = function (game) {
     this.create = function (gr) {
         keyboard = game.input.keyboard;
         group = gr;
-        dot = new Phaser.Sprite(game, Grid.WIDTH / 2 - DOT_SIZE / 2, Grid.HEIGHT / 2 - DOT_SIZE / 2, 'dot');
+        dot = new Phaser.Sprite(game, Grid.WIDTH / 2, Grid.HEIGHT / 2, 'dot');
+        dot.anchor = new Phaser.Point(0.5, 0.5);
+        game.add.tween(dot.scale).to(
+            {x: 0.5, y: 0.5},
+            400,
+            Phaser.Easing.Elastic.InOut,
+            true,
+            0,
+            99999999999,
+            true
+        );
         dot.body.immovable = true;
         group.add(dot);
     };

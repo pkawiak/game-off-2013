@@ -4,7 +4,8 @@ window.Grid.game.Lines = function (game) {
         group,
         MAX_LINES = 3,
         LINE_VELOCITY = 100,
-        BREACH_RADIUS = 50;
+        BREACH_RADIUS = 50,
+        BREACH_WIDTH = BREACH_RADIUS * 2;
 
     this.preload = function () {
         game.load.image('horizontal_line', 'assets/images/horizontal_line.png');
@@ -18,6 +19,10 @@ window.Grid.game.Lines = function (game) {
 
     this.getLines = function () {
         return lines;
+    };
+
+    this.randomBreachPoint = function () {
+        return Math.random() * (Grid.HEIGHT - BREACH_WIDTH) + BREACH_RADIUS;
     };
 
     this.addLine = function () {
@@ -37,7 +42,7 @@ window.Grid.game.Lines = function (game) {
                 x = Grid.WIDTH;
                 velocity.x = -LINE_VELOCITY;
             }
-            breachPoint = Grid.WIDTH * 0.5;
+            breachPoint = this.randomBreachPoint();
             breachPointA = breachPoint - BREACH_RADIUS;
             breachPointB = breachPoint + BREACH_RADIUS;
             linePart1 = new Phaser.Sprite(game, x, -Grid.HEIGHT + breachPointA, imageName);
@@ -53,7 +58,7 @@ window.Grid.game.Lines = function (game) {
                 y = Grid.HEIGHT;
                 velocity.y = -LINE_VELOCITY;
             }
-            breachPoint = Grid.HEIGHT * 0.5;
+            breachPoint = this.randomBreachPoint();
             breachPointA = breachPoint - BREACH_RADIUS;
             breachPointB = breachPoint + BREACH_RADIUS;
             linePart1 = new Phaser.Sprite(game, -Grid.HEIGHT + breachPointA, y, imageName);
