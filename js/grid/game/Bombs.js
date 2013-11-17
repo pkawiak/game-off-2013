@@ -2,11 +2,11 @@ window.Grid.game.Bombs = function (game) {
 
     this.bomb = false;
     this.preload = function () {
-        game.load.image('bomb', 'assets/images/bomb.png');
+        game.load.image('bonus', 'assets/images/bomb.png');
     };
 
     this.createBomb = function (x, y) {
-        this.bomb = new Phaser.Sprite(game, Grid.CELL_SIZE * x + 32, Grid.CELL_SIZE * y + 32, 'bomb');
+        this.bomb = new Phaser.Sprite(game, Grid.CELL_SIZE * x + 32, Grid.CELL_SIZE * y + 32, 'bonus');
         this.allGameObjects.add(this.bomb);
     };
 
@@ -42,8 +42,5 @@ window.Grid.game.Bombs = function (game) {
         return Math.floor(Math.random() * Grid.CELLS_COUNT);
     };
 
-    this.die = function () {
-
-    };
 
 };

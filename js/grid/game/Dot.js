@@ -1,4 +1,4 @@
-window.Grid.game.Dot = function (game,audio) {
+window.Grid.game.Dot = function (game,audio,score,bonuses) {
 
     var dot, group, keyboard,
         DOT_STEP = 64,
@@ -42,6 +42,14 @@ window.Grid.game.Dot = function (game,audio) {
                 audio.playCrash();
                 Grid.game.gameOver();
             }
+
+            if (Grid.DX == Grid.SX && Grid.DY == Grid.SY) {
+                audio.playScore();
+                score.addScore(1000);
+                bonuses.removeBonus();
+
+            }
+
             moving = true;
             game.add.tween(dot).to(
                 {x: dot.x + x, y: dot.y + y},
@@ -56,19 +64,19 @@ window.Grid.game.Dot = function (game,audio) {
 
     this.canMove = function (x, y) {
         if (!moving) {
-            if (x < 0 && dx > 0) {
+            if (x < 0 && Grid.DX > 0) {
                 Grid.DX--;
                 return true;
             }
-            if (x > 0 && dx < 6) {
+            if (x > 0 && Grid.DX < 6) {
                 Grid.DX++;
                 return true;
             }
-            if (y < 0 && dy > 0) {
+            if (y < 0 && Grid.DY > 0) {
                 Grid.DY--;
                 return true;
             }
-            if (y > 0 && dy < 6) {
+            if (y > 0 && Grid.DY < 6) {
                 Grid.DY++;
                 return true;
             }
