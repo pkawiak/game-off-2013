@@ -1,8 +1,8 @@
-window.Grid.game.Dot = function (game,audio,score,bonuses) {
+window.Grid.game.Dot = function (game, audio, score, bonuses) {
 
     var dot, group, keyboard,
         DOT_STEP = 64,
-        MOVE_DURATION = 300,
+        MOVE_DURATION = 100,
         moving = false,
         dx = 3, dy = 3;
 
@@ -31,9 +31,30 @@ window.Grid.game.Dot = function (game,audio,score,bonuses) {
         );
         dot.body.immovable = true;
         group.add(dot);
+
+        this.upKey = game.input.keyboard.addKey(Phaser.Keyboard.UP);
+        this.leftKey = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
+        this.rightKey = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+        this.downKey = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
+
+        this.upKey.onDown.add(function () {
+            this.requestMove(0, -DOT_STEP);
+        }, this);
+        this.downKey.onDown.add(function () {
+            this.requestMove(0, DOT_STEP);
+        }, this);
+        this.leftKey.onDown.add(function () {
+            this.requestMove(-DOT_STEP, 0);
+        }, this);
+        this.rightKey.onDown.add(function () {
+            this.requestMove(DOT_STEP, 0);
+        }, this);
+
     };
 
     this.requestMove = function (x, y) {
+
+
         var me = this;
         if (this.canMove(x, y)) {
 
@@ -43,7 +64,7 @@ window.Grid.game.Dot = function (game,audio,score,bonuses) {
                 Grid.game.gameOver();
             }
 
-        //    console.log(Grid.SX,Grid.DX,Grid.SY,Grid.DY);
+            //    console.log(Grid.SX,Grid.DX,Grid.SY,Grid.DY);
             if (Grid.DX == Grid.SX && Grid.DY == Grid.SY) {
                 audio.playScore();
                 score.addScore(1000);
@@ -86,22 +107,22 @@ window.Grid.game.Dot = function (game,audio,score,bonuses) {
     };
 
     this.update = function () {
-        if (keyboard.isDown(Phaser.Keyboard.RIGHT)) {
-        } else if (keyboard.justReleased(Phaser.Keyboard.RIGHT)) {
-            this.requestMove(DOT_STEP, 0);
-        }
-        if (keyboard.isDown(Phaser.Keyboard.LEFT)) {
-        } else if (keyboard.justReleased(Phaser.Keyboard.LEFT)) {
-            this.requestMove(-DOT_STEP, 0);
-        }
-        if (keyboard.isDown(Phaser.Keyboard.UP)) {
-        } else if (keyboard.justReleased(Phaser.Keyboard.UP)) {
-            this.requestMove(0, -DOT_STEP);
-        }
-        if (keyboard.isDown(Phaser.Keyboard.DOWN)) {
-        } else if (keyboard.justReleased(Phaser.Keyboard.DOWN)) {
-            this.requestMove(0, DOT_STEP);
-        }
+//        if (keyboard.isDown(Phaser.Keyboard.RIGHT)) {
+//        } else if (keyboard.justReleased(Phaser.Keyboard.RIGHT)) {
+//            this.requestMove(DOT_STEP, 0);
+//        }
+//        if (keyboard.isDown(Phaser.Keyboard.LEFT)) {
+//        } else if (keyboard.justReleased(Phaser.Keyboard.LEFT)) {
+//            this.requestMove(-DOT_STEP, 0);
+//        }
+//        if (keyboard.isDown(Phaser.Keyboard.UP)) {
+//        } else if (keyboard.justReleased(Phaser.Keyboard.UP)) {
+//            this.requestMove(0, -DOT_STEP);
+//        }
+//        if (keyboard.isDown(Phaser.Keyboard.DOWN)) {
+//        } else if (keyboard.justReleased(Phaser.Keyboard.DOWN)) {
+//            this.requestMove(0, DOT_STEP);
+//        }
     };
 
     this.die = function () {
