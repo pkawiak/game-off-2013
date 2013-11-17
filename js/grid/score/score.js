@@ -18,7 +18,7 @@ window.Grid.score.Score = function (game) {
 
     this.update = function () {
         if (!gameOver) {
-            this.scoreText.setText('Score: ' + Math.round(this.addScore(10)));
+            this.scoreText.setText('Score: ' + this.score);
         }
 
     };
@@ -39,7 +39,7 @@ window.Grid.score.Score = function (game) {
 
     };
 
-    this.restartGame = function (){
+    this.restartGame = function () {
         window.location.reload();
     }
 

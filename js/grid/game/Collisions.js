@@ -1,4 +1,4 @@
-window.Grid.game.Collisions = function (game) {
+window.Grid.game.Collisions = function (game, score) {
 
     var dot, lines;
 
@@ -10,9 +10,12 @@ window.Grid.game.Collisions = function (game) {
     this.update = function () {
         var i,
             dt = dot.getDot(),
-            ln = lines.getLines();
-        for (i = 0; i < ln.length; i++) {
-            game.physics.collide(dt, ln[i], this.onCollide, null, this);
+            lns = lines.getLines(),
+            ln, callback;
+        for (i = 0; i < lns.length; i++) {
+            ln = lns[i];
+            callback = ln.__isBreach ? this.onPass : this.onCollide;
+            game.physics.collide(dt, lns[i], callback, null, this);
         }
     };
 
@@ -20,5 +23,10 @@ window.Grid.game.Collisions = function (game) {
         dot.die();
         Grid.game.gameOver();
 
+    };
+
+    this.onPass = function (dot, breach) {
+        score.addScore(100);
+        lines.breachPassed(breach);
     };
 };

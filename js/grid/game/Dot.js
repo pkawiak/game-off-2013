@@ -3,7 +3,7 @@ window.Grid.game.Dot = function (game) {
     var dot, group, keyboard,
         DOT_SIZE = 32,
         DOT_STEP = 64,
-        MOVE_DURATION = 500,
+        MOVE_DURATION = 300,
         moving = false,
         dx = 3, dy = 3;
 
@@ -19,6 +19,7 @@ window.Grid.game.Dot = function (game) {
         keyboard = game.input.keyboard;
         group = gr;
         dot = new Phaser.Sprite(game, Grid.WIDTH / 2 - DOT_SIZE / 2, Grid.HEIGHT / 2 - DOT_SIZE / 2, 'dot');
+        dot.body.immovable = true;
         group.add(dot);
     };
 
@@ -29,10 +30,10 @@ window.Grid.game.Dot = function (game) {
             game.add.tween(dot).to(
                 {x: dot.x + x, y: dot.y + y},
                 MOVE_DURATION,
-                Phaser.Easing.Sinusoidal.None, true
+                Phaser.Easing.Linear.None, true
             ).onCompleteCallback(function () {
-                                     moving = false;
-                                 });
+                    moving = false;
+                });
         }
     };
 

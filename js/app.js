@@ -11,8 +11,8 @@
         lines = new Grid.game.Lines(game),
         audio = new Grid.audio.Audio(game),
         allGameObjects,
-        collisions = new Grid.game.Collisions(game),
-        score = new Grid.score.Score(game);
+        score = new Grid.score.Score(game),
+        collisions = new Grid.game.Collisions(game, score);
 
     function preload() {
         this.game.load.spritesheet('start', 'assets/images/start.png', 229, 45);
@@ -31,7 +31,7 @@
 
     function create() {
         this.welcomeText = this.game.add.bitmapText(200, 150, 'GRID', { font: '50px Arial', align: 'center' });
-        this.start  = this.game.add.button(150, 250, 'start', startGame, this, 0, 0, 0);
+        this.start = this.game.add.button(150, 250, 'start', startGame, this, 0, 0, 0);
 
 
     }
@@ -48,7 +48,7 @@
     }
 
     function startGame() {
-        this.start.setFrames(1,1,1);
+        this.start.setFrames(1, 1, 1);
         this.welcomeText.setText("");
         this.start.kill();
         createGame();
@@ -58,17 +58,17 @@
 
     function update() {
         if (gameStarted) {
-        dot.update();
-        score.update();
-        audio.update();
-        lines.update();
-        collisions.update();
+            dot.update();
+            score.update();
+            audio.update();
+            lines.update();
+            collisions.update();
         }
     }
 
     Grid.game.gameOver = function () {
         gameOver = true;
-        allGameObjects.alpha=0;
+        allGameObjects.alpha = 0;
         score.finalScore();
 
     }

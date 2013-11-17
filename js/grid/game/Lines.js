@@ -74,6 +74,7 @@ window.Grid.game.Lines = function (game) {
         linePart1.__isVertical = vertical;
         linePart2.__isVertical = vertical;
         breach.__isVertical = vertical;
+        breach.__isBreach = true;
 
         lines.push(linePart1);
         lines.push(linePart2);
@@ -84,6 +85,15 @@ window.Grid.game.Lines = function (game) {
         group.add(breach);
     };
 
+    this.breachPassed = function (breach) {
+        group.remove(breach);
+        for (var i = 0; i < lines.length; i++) {
+            if (lines[i] === breach) {
+                lines.splice(i, 1);
+                return;
+            }
+        }
+    };
 
     this.shouldAddLine = function () {
         return lines.length < MAX_LINES;
